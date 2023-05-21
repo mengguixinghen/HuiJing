@@ -1,0 +1,54 @@
+一.常用的dos命令
+cd.. :到上一级目录
+cd/  :到最开始的目录
+编辑里面的清除屏幕或者：control+command+L
+cp a.txt abc  把a.txt文件复制到abc文件夹
+mv a.txt abc  把a.txt文件移到abc文件夹
+相对路径：从当前目录开始定位，形成的一个路径。
+绝对路径：从顶级目录开始定位，形成的路径。
+需求：从HuiJing\abc\test100访问HuiJing\abc2\test200\hello.txt
+相对路径 cd ../../abc2/test200
+绝对路径：cd users/menggui/HuiJing/abc2/test200
+二.java注释类型
+(1) 单行注释 //
+(2) 多行注释 /* */
+(3) 文档注释 /** */
+/**
+*@author 韩顺平
+*@version 1.0
+*/
+ javadoc -d -author -version Comment02.java 
+三.转义字符
+在控制台，输入 tab 键，可以实现命令补全
+\t ：一个制表位，实现对齐的功能
+\n ：换行符
+\\ ：一个\
+\\\\:两个\
+\" :一个"
+\' ：一个'
+\r :一个回车
+选中，按tab整体右移
+选中，按shift+tab整体左移
+四.代码演示
+1.编写输出hello,world程序 
+public class Hello 表示 Hello 是一个类,是一个 public 公有的类
+一个源文件中最多只能有一个 public 类  
+Hello{ }表示一个类的开始和结束
+public static void main(String[] args) 表示一个主方法,即我们程序的入口
+main(){ }方法的开始和结束
+System.out.println("hello,world~"); 表示输出"hello,world~"到屏幕
+public class Hello{
+	  //编写一个main方法
+	public static void main(String[] args){
+		System.out.println("hello,world");
+	}
+}
+javac Hello.java 编译代码
+java Hello  运行代码
+2.将个人的基本信息（姓名、性别、籍贯、住址）打印到控制台输出。
+public class Homework01{
+	public static void main(String[] args){
+		//考察对转义字符使用
+		System.out.println("姓名\t性别\t籍贯\t住址\n小微\t女\t河北\t沧州");
+	}
+}
