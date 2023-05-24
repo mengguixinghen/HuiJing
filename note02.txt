@@ -1,0 +1,120 @@
+一.变量使用的基本步骤
+(1)声明变量
+   int a;
+(2)赋值
+   a = 60;//把60赋给a 
+(3)使用System.out.println(a);//输出a的值
+通常一步到位：int a = 60;
+二.代码演示
+1.入门1
+public class Var01{
+	  //编写一个main方法
+	public static void main(String[] args){
+			int a = 1;//定义了一个变量，类型int整型，名称a，值1
+			int b = 3;//定义了一个变量，类型int整型，名称b，值3
+			b=89;//把89这个值赋给了b
+			System.out.println(a);//输出a变量的值
+			System.out.println(b);//输出b变量的值
+		}
+	}
+2.记录人的信息
+public class Var02{
+	  //编写一个main方法
+          public static void main(String[] args){
+		//记录人的信息
+		String name = "King";
+		int age = 30;
+		char gender = '男';
+		double score = 88.9;
+		//输出信息如下：
+        	System.out.println("人的信息如下:");//输出a变量的值
+		System.out.println("姓名:"+name);
+		System.out.println("年龄:"+age);
+		System.out.println("性别:"+gender);
+		System.out.println("成绩:"+score);	
+	}
+}
+三.数据类型(背诵)
+1.数值型
+(1)整数类型byte[1](字节) short[2](短整型) int[4](整型) long[8](长整型)
+byte(字节)范围-128～127，二进制 原码、反码、补码
+java的整型常量(具体值)默认为int型，声明long型常量须加‘l'或‘L‘
+(2)浮点(小数)类型 float[4] double[8]
+java的浮点型常量(具体值)默认为double型，声明float型常量须加‘f'或'F‘
+浮点数=符号位+指数位+尾数位
+尾数部分可能丢失，造成精度损失(小数都是近似值)
+2.字符型(char) 存放单个字符"a"
+字符类型可以表示单个字符，字符类型是char,char是两个字节(可以存放汉字),多个字符我们用字符串String.可以直接给char赋一个整数，然后输出时，会按照对应的unicode字符输出，(不能输出数字，只输出这个数字所表示的字符)
+注意细节：(1).字符常量是用单引号('')括起来的单个字符.
+              如：char c1='a'(对);char c2="5"(❌；这是字符串类型，所以出错）
+        (2).允许使用转义字符，如：char c2='\n';//\n表示换行符
+        (3).在java中，char本质是一个整数，在输出时，是unicode码对应的字符.
+            网址：http://tool.chinaz.com/Tools/Unicode.aspx.可以直接给char赋一个整数，然后输出时，会按照对应的unicode字符输出.
+            (不能输出数字，只输出   这个数字所表示的字符,看编码表ASCII)
+3.布尔型(boolean)只存放true,false,无null
+  boolean类型占一个字节.
+  适用于逻辑运算，一般用于程序流程控制：
+  (1)if条件控制语句；
+  (2)while循环控制语句；
+  (3)do-while循环控制语句；
+  (4)for循环控制语句
+注意：不可以使用0或者非0的整数替代false和true，这点和C语言不同。
+四.Java API文档
+1.API（Application Programming Interface，应用程序接口),是java提供的基本编程接口.中文在线文档：https://www.matools.com
+2.API文档用于告诉开发者如何使用这些类，以及这些类包含的方法.
+3.举例：如何使用ArrayList类的方法：
+  (1)按照：包(java.util)--类(ArrayList)--方法
+  (2)直接搜索/索引：例如找Math
+五.基本数据转换
+1.自动类型转换
+  1.1介绍
+  当java程序在进行赋值或者运算时，精度小的类型自动转换为精度大的数据类型，这个就  是自动类型转换。
+  按照精度大小排序：
+  char-->int-->long-->float-->double
+  byte-->short-->int-->long-->float-->double
+  1.2.自动类型转换注意细节
+  (1).有多种类型的数据混合运算时，系统首先自动将所有数据转化成容量最大的那种数据类型，然后再进行计算.
+  (2).当我们把精度(容量)大的数据类型赋值给精度(容量)小的数据类型时，就会报错，反之就会进行自动类型转换.
+  (3).(byte,short)和char之间不会相互自动转换
+  (4).byte、short、char他们三者可以计算，在计算时首先转化为int类型.
+  (5).boolean不参与转换.
+  (6).自动提升原则：表达式结果的类型自动提升为操作数最大的类型.
+2.强制类型转换
+  2.1介绍
+  自动类型转换的逆过程，将容量大的数据类型转化为容量小的数据类型，使用时要加上强制转换符(),但可能造成精度降低或溢出，格外要注意。  
+  2.2使用细节说明：
+  (1).当进行数据的大小转换，从大-->小，就需要使用强制转换.
+  (2).强制符合只针对于最近的操作数有效，往往会使用小括号提升优先级
+  (3).char类型可以保存int的常量值，但不能保存int的变量值，需要强转
+  (4).byte和short类型在进行运算时，当作int类型处理 
+3.基本数据类型和String类型的转换
+  3.1介绍
+  在程序开发中，我们经常需要将基本数据类型转成String类型.或将String类型转成基本数据类型。
+  (1).基本类型转String类型语法：
+      将基本类型的值+""即可
+      例如：
+      		int n1 = 100;
+		float f1 = 1.1F;
+		double d1 = 4.5;
+		boolean b1 = true;
+		String s1 = n1 + "";
+		String s2 = f1 + "";
+		String s3 = d1 + "";
+		String s4 = b1 + "";
+  (2).String类型转基本数据类型语法：
+      通过基本类型的包装类调用parseXX方法即可.
+      例如：	
+        	String s5 = "123";
+		int num1 = Integer.parseInt(s5);
+		double num2 = Double.parseDouble(s5);
+		float num3 = Float.parseFloat(s5);
+		long num4 = Long.parseLong(s5);
+		byte num5 = Byte.parseByte(s5);
+		boolean b = Boolean.parseBoolean("true");
+         	short num6 = Short.parseShort(s5);
+    注意：在将String类型转成基本数据类型时，要确保String类型能够转成有效的数据，比如可以把"123"，转成一个整数，但是不能把"hello"转成一个整数.如果格式不正确，就会抛出异常，程序就会终止.
+(3).把字符串转成字符char
+    含义：把字符串的第一个字符得到
+    例如：
+		//解读：s5.charAt(0) 得到s5字符串的第一个字符'1'
+        	System.out.println(s5.charAt(0));
