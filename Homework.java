@@ -1,144 +1,210 @@
-//第四章 程序控制结构作业
+//第五章 数组、排序和查找作业
 import java.util.Scanner;
 public class Homework{
 	public static void main(String[] args){
-		//1.编程实现如下功能
-		//某人有100000元，每经过一次路口，需要交费，规则如下:
-		//(1).当现金>50000时，每次交5%
-		//(2).当现金<=50000时，每次交1000
-		//编程计算该人可以经过多少次路口，要求:使用while break方式完成
 		/*
-		int money = 100000;
-		int count = 0;
-		while(true){
-			if(money > 50000){
-				money *= 0.95;
-				count++;
-			}else if(money >= 1000){
-				money -= 1000;
-				count ++;
-			}else{
+		1.下面数组定义正确的有( B、D )
+		A.String strs[] = {'a','b','c'};//❌ char->String
+		B.String[] strs = {"a","b","c"};//✅
+		C.String[] strs = new String{"a","b","c"};//❌
+		D.String strs[] = new String[]{"a","b","c"};//对!!!!!
+		E.String[] strs = new String[3]{"a","b","c"};//❌
+		
+		//2.写出结果
+		String foo = "blue";
+		boolean[] bar = new boolean[2];
+		if(bar[0]){//bar[0]默认false bar[0]默认false
+			foo = "green";
+		}
+		System.out.println(foo);//blue
+		
+		//3.以下Java代码的输出结果为( )
+		int num = 1;
+		while(num < 10){
+			System.out.println(num);
+			if(num > 5){
 				break;
 			}
-		}
-		System.out.println("100000元可以经过" + count +"次路口");
+			num += 2;
+		}//1 3 5 7 
 		*/
 
-		//2.实现判断一个整数，属于哪个范围:大于0；小于0；等于0
-		/*
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("请输入一个整数");
-		int Num = scanner.nextInt();
-		if(Num > 0){
-			System.out.println("大于0");
-		}else if(Num == 0){
-			System.out.println("等于0");
-		}else{
-			System.out.println("小于0");
-		}
-		*/
+        //4.已知有个升序的数组，要求插入一个元素，该数组顺序依然是升序.
+        //比如:[10,12,45,90],添加23后，数组为[10，12，23，45，90]
+        /*
+        	int arr[]={10,12,45,90};
+        	do{
+        	int arr1[] = new int[arr.length + 1];
+        	Scanner scanner = new Scanner(System.in);
+        	for(int i = 0;i < arr.length;i++){
+        		arr1[i] = arr[i];
+            }
+            System.out.println("输入要求插入的一个元素:");
+            int n = scanner.nextInt();
+            arr1[arr.length] = n;//插入元素放到最后的位置
+            int temp = arr1[0];
+            arr = arr1;
+            for(int j = 0; j < arr.length -1;j++){
+            for(int i = 0;i < arr.length -1-j;i++){ //排序         	
+            	if (arr[i] > arr[i+1]){
+            		temp = arr[i+1];
+            		arr[i+1] = arr[i];
+            		arr[i] = temp;
+            	}
+            }
+        }
+             System.out.println("插入成功，展示效果:");
+            for(int i = 0;i < arr.length;i++){        
+            System.out.print(arr[i] + " ");
+        }
+            System.out.println("\n是否继续添加？y/n");
+            char c = scanner.next().charAt(0);
+            if(c == 'n'){
+            	System.out.println("退出插入程序...");
+            	break;
+            }
+        }while(true);
+        */
+        //老师讲解
+        /*
+           int[] arr = {10,12,45,90};
+           int insertNum = 23;
+           int index = -1;//index就是要插入的位置
+           //遍历arr数组，如果发现insertNum <= arr[i],说明i就是要插入的位置
+           //使用index 保留 index = i;
+           //如果遍历完后，没有发现insertNum <= arr[i],说明index = arr.length
+           //即添加到arr最后.
+           for(int i = 0;i < arr.length;i++){
+            if(insertNum <= arr[i]){
+                index = i;
+                break;//找到位置后就退出
+            }
+           }
+           //判断index的值
+           if(index == -1){//说明没有找到位置
+            index= arr.length;
+        }
+        //System.out.println("index=" + index);
+        //扩容
+        //先创建一个新的数组，大小 arr.length +1
+        int[] arrNew = new int[arr.length + 1];
+        //将arr的元素拷贝到arrNew，并且要跳过index位置. 
+        // 分析:
+        // int[] arr = {10,12,45,90};
+        // arrNew = {10,12, ,45,90};
+        // arrNew = {10,12,23,45,90}
+        //i控制arrNew的下标，j控制arr数组的下标
+        for(int i = 0,j = 0;i < arrNew.length;i++){
+            if(i != index){
+                arrNew[i] = arr[j];
+                j++;
+            }else{//此时i的位置就是要插入的数
+                arrNew[i] = insertNum;
+            }
+        }
+        arr = arrNew;
+        System.out.println("======插入后，arr数组的元素情况======");
+        for(int i = 0;i < arr.length;i++){
+            System.out.print(arr[i] +" ");
+        }
+        */
 
-		//3.判断一个年份是否为闰年
-		//(1)年份能被4整除，但不能被100整除 （2）能被400整除
-		/*
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("请输入一个年份");
-		int year = scanner.nextInt();
-		if((year % 4 ==0 && year % 100 !=0) | year % 400 ==0){
-			System.out.println(year + "是闰年");
-		}else{
-			System.out.println(year + "不是闰年");
-		}
-		*/
+        //5.随机生成10个整数(1-100的范围)保存到数组，并倒序打印
+        //  以及求平均值、最大值和最大值的下标，并查找里面是否有8.
+        /*
+        int arr[] = new int[10];
+        for(int i = 0;i < arr.length;i++){
+            arr[i] =(int)(Math.random()*100) + 1;//随机生成1-100的数
+        }
+        System.out.println("随机生成的十个整数:");
+        for(int i = 0;i < arr.length;i++){
+            System.out.print(arr[i] +"\t");
+        }
+        System.out.println("\n倒序打印随机生成的十个整数:");
+        for(int j = arr.length -1;j >= 0;j--){
+            System.out.print(arr[j] + "\t");
+        }
+        //求平均值
+        double sum = 0;;
+        for(int i = 0;i < arr.length;i++){
+            sum += arr[i];
+        }
+        System.out.println("\n平均值=" + sum/10);
+        //最大值和最大值的下标
+        int max = arr[0];
+        int index = 0;
+        for(int i = 1;i < arr.length;i++){
+            if(max < arr[i]){
+                max = arr[i];
+                index = i;
+            }
+        }
+        System.out.println("max=" + max);  
+        System.out.println("最大值的下标=" + index);
+        //查找是否含有8
+        int find = 8;
+        int d = -1;
+        for(int i = 0;i < arr.length;i++){
+        if(find == arr[i]){
+            System.out.println("找到数" + find + " 下标=" + i);
+            d = i;
+            break;
+        }
 
-		//4.判断一个整数是否是水仙花数，所谓水仙花数是指一个3位数，其各个位上数字立方和等于其本身.
-		//例如:153=1*1*1+3*3*3+5*5*5
-		//Num百位=Num/100;
-		//Num十位=Num%100/10;
-		//Num个位=Num%10;
-		/*
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("请输入一个3位数:");
-		int Num = scanner.nextInt();
-		int Num1 = Num/100;
-		int Num2 = Num%100/10;
-		int Num3 = Num%10;
-		if(Num1*Num1*Num1 + Num2*Num2*Num2 + Num3*Num3*Num3 == Num){
-			System.out.println(Num + "是水仙花数");
-		}else{
-			System.out.println(Num + "不是水仙花数");
-		}
-		*/
-		//5.看看下面代码输出什么
-		/*
-		int m = 0,n = 3;
-		if(m > 0){
-			if(n > 2)
-				System.out.println("OK1");
-			
-			else
-				System.out.println("OK2");
+        if(d == -1){
+            System.out.println("没有找到" + find);
+            break;
+        }
+        }
+        */
 
-		}//什么也不输出	
-		*/	
-		//6.输出1-100之间的不能被5整除的数，每5个一行
-		/*
-		int count = 0;
-		System.out.println("输出1-100之间的不能被5整除的数:");
-		for(int i = 1;i <= 100;i++){	
-			if(i % 5 !=0){
-				System.out.print(i + "\t");
-				count++;
-		    if(count % 5 == 0){
-			    System.out.println();
-		    }
-		}
-	}
-	*/	
-		//7.输出小写的a-z以及大写的Z-A
-		/*
-		char n1 = 'a';
-		char n2 = 'Z';
-		for(int i = 1;i <= 26;i++){	
-			System.out.println((char)n1);
-			n1 += 1;
-		}
-		for(int i = 1;i <= 26;i++){	
-			System.out.println((char)n2);
-			n2 -= 1;
-		}
-		*/
-		//老师讲解
-		/*
-		for(char c1 = 'a';c1 <= 'z'; c1++){
-			System.out.print(c1 + " ");
-		}
-		System.out.print("\n");
-		for(char c1 = 'Z';c1 >= 'A'; c1--){
-			System.out.print(c1 + " ");
-		}
-		*/		
-		//8.求出1-1/2+1/3-1/4......1/100的和
-		/*
-		double sum = 0;
-		for(int i = 1;i <= 100;i++){
-			if(i % 2 != 0){
-				sum += 1.0/i;//必须写1.0，不然1/i就是整数.
-			}else{
-				sum -= 1.0/i;
-			}
-		}
-		System.out.println("1-1/2+1/3-1/4......1/100的和为" + sum);
-		*/
-		//9.求1+(1+2)+(1+2+3)+(1+2+3+4)+...+(1+2+3+...+100)的结果
-		/*
-		int sum = 0;
-		for(int i = 1; i <= 100;i++){
-			for(int j = 1;j <= i;j++){
-				sum += j;
-			}
-		}
-		System.out.println("1+(1+2)+(1+2+3)+(1+2+3+4)+...+(1+2+3+...+100)的结果为" + sum);
-		*/
+        //6.试写出以下代码的打印结果
+        /* 
+            char[] arr1 = {'a','z','b','c'};
+            char[] arr2 = arr1;
+            arr1[2] = '韩';
+            for(int i = 0;i < arr2.length;i++){
+            	System.out.println(arr1[i] + "," + arr2[i]);
+            }//a,a z,z 韩,韩 c,c
+        */
+
+        //7.写出冒泡排序的代码
+            
+            //要求从小到大排序
+            /*
+            int arr[] = {10,30,20,-10,3};
+            int temp = 0;
+            for(int i = 0;i < arr.length-1;i++){
+                for(int j = 0;j < arr.length-1-i;j++){
+                    if(arr[j] > arr[j+1]){
+                         temp = arr[j+1];
+                         arr[j+1] = arr[j];
+                         arr[j] = temp;
+                    }
+                }
+            }         
+            System.out.println("冒泡排序后:");
+            for(int i = 0;i < arr.length;i++){
+                System.out.print(arr[i] + " ");
+            }
+            */
+            //要求从小到大排序
+            /*
+            int arr[] = {10,30,20,-10,3};
+            int temp = 0;
+            for(int i = 0;i < arr.length-1;i++){
+                for(int j = 0;j < arr.length-1-i;j++){
+                    if(arr[j] < arr[j+1]){
+                         temp = arr[j+1];
+                         arr[j+1] = arr[j];
+                         arr[j] = temp;
+                    }
+                }
+            }         
+            System.out.println("冒泡排序后:");
+            for(int i = 0;i < arr.length;i++){
+                System.out.print(arr[i] + " ");
+            }
+            */
 	}
 }
